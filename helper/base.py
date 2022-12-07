@@ -5,7 +5,6 @@ from selenium.webdriver.remote.webelement import WebElement
 
 class DDT_edge:
     driver = None
-    data = None
 
     def __init__(self, url):
         self.driver = Edge()
@@ -42,16 +41,12 @@ class DDT_edge:
     def wait(self, secs: float):
         time.sleep(secs)
 
-    def read_data(self):
-        self.data = []
-
 class Dataframe:
     storage = {}
 
     def read_excel(self, io, sheet_name, skiprows):
         loaded_data = read_excel(io=io, sheet_name=sheet_name, skiprows=skiprows)
-        for key in loaded_data:
-            self.storage[key] = loaded_data[key].to_numpy()
+        self.storage[sheet_name] = loaded_data.fillna('').to_numpy()
     
     def print_df(self):
         print(self.storage)

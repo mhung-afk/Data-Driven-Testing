@@ -12,5 +12,5 @@ pip install selenium webdriver-manager pandas openpyxl python-dotenv numpy
 ## How to run
 Open any CLIs
 ```
-python main.py
+python main.py --feature <required testing feature> --io <required xlsx testcase file> --sheet <required sheetname> --skiprows <optional skiprows>
 ```
