@@ -10,7 +10,9 @@ def main(feature, io, sheet, skiprows):
     if test:
         DF = Dataframe()
         DF.read_excel(io=f'test-data/{io}', sheet_name=sheet, skiprows=skiprows)
-        test.run(DF.storage[sheet])
+        DF.print_df()
+        result = test.run(DF.storage[sheet])
+        DF.write_result(result)
         return
     raise Exception('Something is wrong')
 

@@ -1,5 +1,6 @@
 import time
-from pandas import read_excel
+from pandas import read_excel, DataFrame, ExcelWriter
+from openpyxl import load_workbook
 from selenium.webdriver import Edge
 from selenium.webdriver.remote.webelement import WebElement
 
@@ -43,13 +44,26 @@ class DDT_edge:
 
 class Dataframe:
     storage = {}
+    loaded_data: DataFrame = None
+    excel_file = None
+    sheet_name = None
+    skiprows = None
 
-    def read_excel(self, io, sheet_name, skiprows):
-        loaded_data = read_excel(io=io, sheet_name=sheet_name, skiprows=skiprows)
-        self.storage[sheet_name] = loaded_data.fillna('').to_numpy()
+    def read_excel(self, io, sheet_name, skiprows = None):
+        self.excel_file = io
+        self.sheet_name = sheet_name
+        self.skiprows = skiprows
+        self.loaded_data = read_excel(io=io, sheet_name=sheet_name, skiprows=skiprows, nrows=1)
+        self.storage[sheet_name] = self.loaded_data.fillna('').to_numpy()
+        # print(self.loaded_data)
     
     def print_df(self):
         print(self.storage)
+    
+    def write_result(self, result: list[str]):
+        self.loaded_data["Result"] = result
+        with ExcelWriter(self.excel_file, mode="a", if_sheet_exists="overlay") as writer:
+            self.loaded_data["Result"].to_excel(writer, sheet_name=self.sheet_name, startrow=self.skiprows+1, startcol=9, header=False, index=False)
 
 
 def handle_datetime(str: str):
@@ -60,3 +74,6 @@ def handle_datetime(str: str):
         return [day, month, year, hour, minute]
     except:
         raise Exception("Input doesn't have required datetime format")
+
+def handle_result(is_success: bool):
+    return "success" if is_success else "fail"

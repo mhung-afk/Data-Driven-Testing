@@ -5,9 +5,6 @@ class Add_Event_DDT_edge(DDT_edge):
     def click_add_event_btn(self):
         while True:
             try:
-                # add_event_button = self.find_ele(By.XPATH, """//button[text()='
-                #     Sự kiện mới
-                # ']""")
                 add_event_btn = self.find_ele(By.CSS_SELECTOR, 'button.btn.btn-primary.float-sm-right.float-right')
                 self.click(add_event_btn)
                 break
@@ -15,17 +12,24 @@ class Add_Event_DDT_edge(DDT_edge):
                 self.wait(1)
 
     def click_expand_add_event_form(self):
-        expand_button = self.find_ele(By.CSS_SELECTOR, 'a.moreless-toggler')
-        self.click(expand_button)
+        while True:
+            try:
+                expand_button = self.find_ele(By.CSS_SELECTOR, 'a.moreless-toggler')
+                self.click(expand_button)
+                break
+            except:
+                self.wait(1)
 
     def check_if_success(self):
-        self.wait(1)
+        is_success = True
         try:
+            feedbacks = self.find_eles(By.CSS_SELECTOR, '.form-control-feedback.invalid-feedback')
+            if any([(len(fb.text.strip()) > 0) for fb in feedbacks]):
+                is_success = False
             close_btn = self.find_ele(By.CSS_SELECTOR, "button.close[aria-label='Close']")
             self.click(close_btn)
-            return False
-        except:
-            return True
+        finally:
+            return is_success
 
     def fill_in_add_event(self, record):
         print(record)
@@ -37,7 +41,6 @@ class Add_Event_DDT_edge(DDT_edge):
                 break
             except:
                 self.wait(1)
-
 
         datetime = handle_datetime(record[2])
         temp = self.find_ele(By.ID, 'id_timestart_day')
