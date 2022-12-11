@@ -63,7 +63,7 @@ class Dataframe:
     def write_result(self, result: list[str]):
         self.loaded_data["Result"] = result
         with ExcelWriter(self.excel_file, mode="a", if_sheet_exists="overlay") as writer:
-            self.loaded_data["Result"].to_excel(writer, sheet_name=self.sheet_name, startrow=self.skiprows+1, startcol=9, header=False, index=False)
+            self.loaded_data["Result"].to_excel(writer, sheet_name=self.sheet_name, startrow=self.skiprows+1, startcol=self.loaded_data.shape[1]-1, header=False, index=False)
 
 
 def handle_datetime(str: str):
