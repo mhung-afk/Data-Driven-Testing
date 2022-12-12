@@ -49,11 +49,11 @@ class Dataframe:
     sheet_name = None
     skiprows = None
 
-    def read_excel(self, io, sheet_name, skiprows = None):
+    def read_excel(self, io, sheet_name, skiprows = 0):
         self.excel_file = io
         self.sheet_name = sheet_name
         self.skiprows = skiprows
-        self.loaded_data = read_excel(io=io, sheet_name=sheet_name, skiprows=skiprows, nrows=1)
+        self.loaded_data = read_excel(io=io, sheet_name=sheet_name, skiprows=skiprows)
         self.storage[sheet_name] = self.loaded_data.fillna('').to_numpy()
         # print(self.loaded_data)
     
