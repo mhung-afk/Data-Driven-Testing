@@ -1,7 +1,7 @@
 from helper.base import DDT_edge, handle_datetime
 from selenium.webdriver.common.by import By
 
-class B_update_assignment(DDT_edge):
+class B_upload_assignment(DDT_edge):
     def click_add_file_button(self):
         while True:
             try:
@@ -11,7 +11,7 @@ class B_update_assignment(DDT_edge):
             except:
                 self.wait(1)
 
-    def fill_file_path(self, xpath, file_path):
+    def fill_file_path(self, file_path):
         while True:
             try:
                 file_form = self.find_ele(By.XPATH, "//input[@name=\"repo_upload_file\"]")
@@ -20,7 +20,7 @@ class B_update_assignment(DDT_edge):
             except:
                 self.wait(1)
 
-    def fill_name_form(self, xpath, name):
+    def fill_name_form(self, name):
         while True:
             try:
                 name_form = self.find_ele(By.XPATH, "//input[@class=\"form-control\"][@name=\"title\"]")
@@ -29,7 +29,7 @@ class B_update_assignment(DDT_edge):
             except:
                 self.wait(1)
 
-    def click_upload(self, xpath):
+    def click_upload(self):
         while True:
             try:
                 button = self.find_ele(By.XPATH, "//*[@class=\"fp-upload-btn btn-primary btn\"]")
@@ -38,9 +38,23 @@ class B_update_assignment(DDT_edge):
             except:
                 self.wait(1)
 
-    def check_if_success(self, xpath):
-        try:
-            error = self.find_ele(By.XPATH, "//h5[text()='Lỗi']")
-            return False
-        except:
-            return True
+    def check_if_success(self):
+        while True:
+            try:
+                # File upload is done if the filepicker is hidden
+                file_dialog = self.find_ele(By.XPATH, "//*[contains(@class, 'filepicker')][contains(@class, 'moodle-dialogue-hidden')]")
+                return True
+            except:
+                try:
+                    error = self.find_ele(By.XPATH, "//h5[text()='Lỗi']")
+                    return False
+                except:
+                    self.wait(1)
+
+    def get_server_file_name(self):
+        while True:
+            try:
+                span_tag = self.find_ele(By.XPATH, "//*[@class=\"fp-filename\"]")
+                return span_tag.text
+            except:
+                self.wait(1)
