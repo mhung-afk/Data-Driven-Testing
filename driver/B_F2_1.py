@@ -19,14 +19,12 @@ class B_F2_1(Login_DDT_edge, B_upload_assignment):
         # self.resolve_item()
         for record in df:
             self.driver.get("https://e-learning.hcmut.edu.vn/mod/assign/view.php?id=42159&action=editsubmission")
-            # alert = Alert(self.driver)
-            # alert.accept()
             self.click_add_file_button()
             self.fill_file_path(os.path.join(cwd, "test-data", "F2", record[1]))
             self.fill_name_form(record[2])
             self.click_upload()
             is_success = handle_result(self.check_if_success())
-            if is_success:
+            if is_success == "success":
                 server_file_name = self.get_server_file_name()
 
                 if is_success == record[3] and server_file_name == record[4]:
@@ -39,7 +37,7 @@ class B_F2_1(Login_DDT_edge, B_upload_assignment):
                 else:
                     result += ["Failed"]
 
-            print(f'{record[0]} - - result:{result[-1]}')
+            print(f'{record[0]} - result: {result[-1]}')
 
             # Refresh the page in case of error
             self.driver.refresh()

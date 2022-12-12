@@ -54,7 +54,7 @@ class B_upload_assignment(DDT_edge):
     def get_server_file_name(self):
         while True:
             try:
-                span_tag = self.find_ele(By.XPATH, "//*[@class=\"fp-filename\"]")
+                span_tag = self.find_ele(By.XPATH, "//*[@id=\"ygtvcontentel4\"]/span/a[1]/span[4]")
                 return span_tag.text
             except:
                 self.wait(1)
