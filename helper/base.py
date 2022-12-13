@@ -1,7 +1,6 @@
 import time
 from pandas import read_excel, DataFrame, ExcelWriter
-from openpyxl import load_workbook
-from selenium.webdriver import Edge
+from selenium.webdriver import Edge, ActionChains
 from selenium.webdriver.remote.webelement import WebElement
 
 class DDT_edge:
@@ -9,6 +8,7 @@ class DDT_edge:
 
     def __init__(self, url):
         self.driver = Edge()
+        self.driver.maximize_window()
         self.driver.get(url)
 
     def find_ele(self, by, ele: str):
@@ -22,6 +22,13 @@ class DDT_edge:
             return self.driver.find_elements(by, ele)
         except:
             raise Exception("Can't get these elements")
+
+    def click_to_ele_with_offset(self, ele: WebElement, x: float, y:float):
+        try:
+            action = ActionChains(self.driver)
+            action.move_to_element_with_offset(ele, x, y).click().perform()
+        except:
+            raise Exception("Can't click on this element")
 
     def click(self, ele: WebElement):
         try:

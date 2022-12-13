@@ -1,4 +1,6 @@
 from driver.B_F5_1 import B_F5_1
+from driver.B_F5_2 import B_F5_2
+from driver.B_F5_3 import B_F5_3
 from driver.B_F2_1 import B_F2_1
 from driver.B_F3_1 import B_F3_1
 from helper.base import Dataframe
@@ -8,6 +10,10 @@ def main(feature, io, sheet, skiprows):
 
     if feature == 'B-F5.1':
         test = B_F5_1()
+    elif feature == 'B-F5.2':
+        test = B_F5_2()
+    elif feature == 'B-F5.3':
+        test = B_F5_3()
     elif feature == "B-F2.1":
         test = B_F2_1()
     elif feature == "B-F3.1":
