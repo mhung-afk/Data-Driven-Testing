@@ -58,3 +58,4 @@ class B_upload_assignment(DDT_edge):
                 return span_tag.text
             except:
                 self.wait(1)
+

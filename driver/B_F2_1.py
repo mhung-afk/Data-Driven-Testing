@@ -32,12 +32,13 @@ class B_F2_1(Login_DDT_edge, B_upload_assignment):
                 else:
                     result += ["Failed"]
             else:
+                server_file_name = "None"
                 if is_success == record[3]:
                     result += ["Passed"]
                 else:
                     result += ["Failed"]
 
-            print(f'{record[0]} - result: {result[-1]}')
+            print(f'Test {record[0]}: Upload status: {is_success} - Filname on server: {server_file_name} - Result: {result[-1]}')
 
             # Refresh the page in case of error
             self.driver.refresh()
