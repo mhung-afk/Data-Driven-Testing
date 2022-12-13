@@ -1,6 +1,6 @@
-from helper.B_login import Login_DDT_edge
 from helper.base import handle_result
-from helper.B_upload_assignment import B_upload_assignment
+from helper.B_create_subject import B_Create_Subject_DDT_edge
+from helper.B_login import Login_DDT_edge
 from selenium.webdriver.common.alert import Alert
 from selenium.common.exceptions import NoAlertPresentException
 
@@ -9,47 +9,27 @@ import os
 cwd = os.getcwd()
 
 
-class B_F2_1(Login_DDT_edge, B_upload_assignment):
+class B_F2_1(Login_DDT_edge, B_Create_Subject_DDT_edge):
     def __init__(self):
         super().__init__("https://e-learning.hcmut.edu.vn/")
 
     def run(self, df):
-        '''Run and save result to internal buffer'''
+        # print(df)
         result = []
+
         self.login_BKeL()
-        # self.resolve_item()
+
+        self.navigate(
+            'https://e-learning.hcmut.edu.vn/mod/forum/view.php?id=8740')
+
         for record in df:
-            self.driver.get(
-                "https://e-learning.hcmut.edu.vn/mod/assign/view.php?id=42159&action=editsubmission")
-            self.click_add_file_button()
-            self.fill_file_path(os.path.join(
-                cwd, "test-data", "F2", record[1]))
-            self.fill_name_form(record[2])
-            self.click_upload()
-            is_success = handle_result(self.check_if_success())
-            if is_success == "success":
-                server_file_name = self.get_server_file_name()
-
-                if is_success == record[3] and server_file_name == record[4]:
-                    result += ["Passed"]
-                else:
-                    result += ["Failed"]
-            else:
-                server_file_name = "None"
-                if is_success == record[3]:
-                    result += ["Passed"]
-                else:
-                    result += ["Failed"]
-
+            self.click_add_event_btn()
+            self.fill_in_add_event(record)
+            is_success = self.check_if_success()
             print(
-                f'Test {record[0]}: Upload status: {is_success} - Filname on server: {server_file_name} - Result: {result[-1]}')
+                f'{record[0]} - expected:{record[8]} - result:{handle_result(is_success)}')
+            result += [handle_result(is_success)]
 
-            # Refresh the page in case of error
-            self.driver.refresh()
-            try:
-                alert = Alert(self.driver)
-                alert.accept()
-            except NoAlertPresentException:
-                continue
+        self.wait(5)
 
         return result
