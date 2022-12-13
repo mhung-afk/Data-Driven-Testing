@@ -56,7 +56,7 @@ class Dataframe:
     sheet_name = None
     skiprows = None
 
-    def read_excel(self, io, sheet_name, skiprows = None):
+    def read_excel(self, io, sheet_name, skiprows = 0):
         self.excel_file = io
         self.sheet_name = sheet_name
         self.skiprows = skiprows
