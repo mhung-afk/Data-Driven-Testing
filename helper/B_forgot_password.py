@@ -21,15 +21,15 @@ class B_Forgot_Password_DDT_edge(DDT_edge):
                 self.wait(1)
 
                 temp = self.find_ele(By.XPATH, '//*[@id="newpassword"]')
-                self.text(temp, record[1])
+                self.text(temp, record[3])
                 self.wait(1)
 
                 temp = self.find_ele(By.XPATH, '//*[@id="confirmpassword"]')
-                self.text(temp, record[2])
+                self.text(temp, record[4])
                 self.wait(1)
 
                 # temp = self.find_ele(By.XPATH, """//button[text()='Save']""")
-                self.click(temp)
+                # self.click(temp)
                 temp = self.find_ele(
                     By.XPATH, '//button[@class="btn btn-success"]')
                 self.click(temp)

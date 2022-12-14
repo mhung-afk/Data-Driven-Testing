@@ -35,7 +35,7 @@ class B_Create_Subject_DDT_edge(DDT_edge):
                 self.wait(1)
 
                 # temp = self.find_ele(By.XPATH, """//button[text()='Save']""")
-                self.click(temp)
+                # self.click(temp)
                 temp = self.find_ele(By.XPATH, '//*[@id="id_submitbutton"]')
                 self.click(temp)
                 self.wait(1)
