@@ -12,7 +12,7 @@ class B_Create_Subject_DDT_edge(DDT_edge):
         while True:
             try:
                 create_subject_btn = self.driver.find_element(
-                    By.XPATH, "//button[contains(text(), \"Thêm một chủ đề thảo luận mới\") or contains(text(),\"Add discussion topic\")]")
+                    By.XPATH, "//a[contains(text(), \"Thêm một chủ đề thảo luận mới\") or contains(text(),\"Add discussion topic\")]")
                 self.click(create_subject_btn)
                 break
             except:

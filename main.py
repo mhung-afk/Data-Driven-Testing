@@ -41,7 +41,7 @@ def main(feature, io, sheet, skiprows):
         test = B_F1_2()
     elif feature == 'B-F1.3':
         test = B_F1_3()
-    elif feature == 'B-F4':
+    elif feature == 'B-F4.1':
         test = B_F4_1()
 
     if test:
