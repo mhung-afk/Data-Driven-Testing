@@ -4,39 +4,34 @@ from random import random
 import math
 
 
-class B_Create_Subject_DDT_edge(DDT_edge):
+class B_Forgot_Password_DDT_edge(DDT_edge):
     will_wait = None
 
-    def click_crreate_subject_btn(self):
-        trial = 0
-        while True:
-            try:
-                create_subject_btn = self.driver.find_element(
-                    By.XPATH, "//button[contains(text(), \"Thêm một chủ đề thảo luận mới\") or contains(text(),\"Add discussion topic\")]")
-                self.click(create_subject_btn)
-                break
-            except:
-                self.wait(1)
-                trial += 1
-                if trial > 3:
-                    break
-
-    def fill_subject_form(self, record):
+    def fill_forgot_password_form(self, record):
         trial = 0
         while True:
             try:
 
-                temp = self.find_ele(By.XPATH, '//*[@id="id_subject"]')
+                temp = self.find_ele(By.XPATH, '//*[@id="login"]')
                 self.text(temp, record[1])
                 self.wait(1)
 
-                temp = self.find_ele(By.XPATH, '//*[@id="id_messageeditable"]')
+                temp = self.find_ele(By.XPATH, '//*[@id="oldpassword"]')
+                self.text(temp, record[2])
+                self.wait(1)
+
+                temp = self.find_ele(By.XPATH, '//*[@id="newpassword"]')
+                self.text(temp, record[1])
+                self.wait(1)
+
+                temp = self.find_ele(By.XPATH, '//*[@id="confirmpassword"]')
                 self.text(temp, record[2])
                 self.wait(1)
 
                 # temp = self.find_ele(By.XPATH, """//button[text()='Save']""")
                 self.click(temp)
-                temp = self.find_ele(By.XPATH, '//*[@id="id_submitbutton"]')
+                temp = self.find_ele(
+                    By.XPATH, '//button[@class="btn btn-success"]')
                 self.click(temp)
                 self.wait(1)
             except:

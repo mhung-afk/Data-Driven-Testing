@@ -9,7 +9,7 @@ import os
 cwd = os.getcwd()
 
 
-class B_F2_1(Login_DDT_edge, B_Create_Subject_DDT_edge):
+class B_F1_1(Login_DDT_edge, B_Create_Subject_DDT_edge):
     def __init__(self):
         super().__init__("https://e-learning.hcmut.edu.vn/")
 
@@ -23,8 +23,8 @@ class B_F2_1(Login_DDT_edge, B_Create_Subject_DDT_edge):
             'https://e-learning.hcmut.edu.vn/mod/forum/view.php?id=8740')
 
         for record in df:
-            self.click_add_event_btn()
-            self.fill_in_add_event(record)
+            self.click_crreate_subject_btn()
+            self.fill_subject_form(record)
             is_success = self.check_if_success()
             print(
                 f'{record[0]} - expected:{record[8]} - result:{handle_result(is_success)}')

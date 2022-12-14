@@ -10,7 +10,7 @@ from driver.B_F9_1 import B_F9_1
 from driver.B_F1_1 import B_F1_1
 from driver.B_F1_2 import B_F1_2
 from driver.B_F1_3 import B_F1_3
-from driver.B_F4 import B_F4
+from driver.B_F4_1 import B_F4_1
 from helper.base import Dataframe
 
 
@@ -42,7 +42,7 @@ def main(feature, io, sheet, skiprows):
     elif feature == 'B-F1.3':
         test = B_F1_3()
     elif feature == 'B-F4':
-        test = B_F4()
+        test = B_F4_1()
 
     if test:
         DF = Dataframe()
