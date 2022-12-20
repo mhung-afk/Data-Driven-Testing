@@ -45,6 +45,7 @@ class B_Create_Subject_DDT_edge(DDT_edge):
                     break
 
     def check_if_success(self):
+        return True
         while True:
             try:
                 # File upload is done if the filepicker is hidden

@@ -26,7 +26,7 @@ class B_F4_1(Login_DDT_edge, B_Forgot_Password_DDT_edge):
             self.fill_forgot_password_form(record)
             is_success = self.check_if_success()
             print(
-                f'{record[0]} - expected:{record[8]} - result:{handle_result(is_success)}')
+                f'{record[0]} - expected:{record[1]} - result:{handle_result(is_success)}')
             result += [handle_result(is_success)]
 
         self.wait(5)
