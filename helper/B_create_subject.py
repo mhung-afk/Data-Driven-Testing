@@ -25,7 +25,6 @@ class B_Create_Subject_DDT_edge(DDT_edge):
         trial = 0
         while True:
             try:
-
                 temp = self.find_ele(By.XPATH, '//*[@id="id_subject"]')
                 self.text(temp, record[1])
                 self.wait(1)
@@ -39,6 +38,7 @@ class B_Create_Subject_DDT_edge(DDT_edge):
                 temp = self.find_ele(By.XPATH, '//*[@id="id_submitbutton"]')
                 self.click(temp)
                 self.wait(1)
+                break
             except:
                 trial += 1
                 if trial > 3:
