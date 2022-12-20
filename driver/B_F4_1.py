@@ -1,6 +1,5 @@
 from helper.base import handle_result
 from helper.B_forgot_password import B_Forgot_Password_DDT_edge
-from helper.B_login import Login_DDT_edge
 from selenium.webdriver.common.alert import Alert
 from selenium.common.exceptions import NoAlertPresentException
 
@@ -9,15 +8,13 @@ import os
 cwd = os.getcwd()
 
 
-class B_F4_1(Login_DDT_edge, B_Forgot_Password_DDT_edge):
+class B_F4_1(B_Forgot_Password_DDT_edge):
     def __init__(self):
         super().__init__("https://e-learning.hcmut.edu.vn/")
 
     def run(self, df):
         # print(df)
         result = []
-
-        self.login_BKeL()
 
         self.navigate(
             'https://account.hcmut.edu.vn/')
