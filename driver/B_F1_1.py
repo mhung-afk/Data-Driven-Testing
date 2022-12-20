@@ -24,14 +24,14 @@ class B_F1_1(Login_DDT_edge, B_Create_Subject_DDT_edge):
 
         for record in df:
             print('ok\n')
-            # self.click_crreate_subject_btn()
-            # self.fill_subject_form(record)
-            # is_success = self.check_if_success()
-            # print(
-            #     f'{record[0]} - expected:{record[8]} - result:{handle_result(is_success)}')
-            # result += [handle_result(is_success)]
-            # # Refresh the page in case of error
-            # self.driver.refresh()
+            self.click_crreate_subject_btn()
+            self.fill_subject_form(record)
+            is_success = self.check_if_success()
+            print(
+                f'{record[0]} - expected:{record[1]} - result:{handle_result(is_success)}')
+            result += [handle_result(is_success)]
+            # Refresh the page in case of error
+            self.driver.refresh()
 
         self.wait(5)
 
