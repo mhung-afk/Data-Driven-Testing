@@ -1,8 +1,9 @@
 from helper.B_login import Login_DDT_edge
 from helper.B_add_event import Add_Event_DDT_edge
+from helper.B_delete_event import Delete_Event_DDT_edge
 from helper.base import handle_result
 
-class B_F5_1(Login_DDT_edge, Add_Event_DDT_edge):
+class B_F6(Login_DDT_edge, Delete_Event_DDT_edge):
     def __init__(self):
         super().__init__("https://e-learning.hcmut.edu.vn/")
 
@@ -12,15 +13,28 @@ class B_F5_1(Login_DDT_edge, Add_Event_DDT_edge):
 
         self.login_BKeL()
 
-        self.navigate('https://e-learning.hcmut.edu.vn/my/')
-
         for record in df:
+            self.navigate('https://e-learning.hcmut.edu.vn/my/')
             passed = False
             while not passed:
                 passed = self.click_add_event_btn()
+
             self.fill_in_add_event(record)
+
+            passed = False
+            while not passed:
+                passed = self.click_event(record)
+
+            passed = False
+            while not passed:
+                passed = self.click_delete_btn()
+
+            passed = False
+            while not passed:
+                passed = self.click_confirm_btn(record)
+
             is_success = self.check_if_success()
-            print(f'{record[0]} - expected:{record[8]} - result:{handle_result(is_success)}')
+            print(f'{record[0]} - expected:{record[4]} - result:{handle_result(is_success)}')
             result += [handle_result(is_success)]
 
         self.wait(5)

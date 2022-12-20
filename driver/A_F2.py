@@ -9,7 +9,7 @@ class A_F2(Sign_Up):
     def run(self, df):
         ini_row = ['ini','hung','initial','data','test@example','0123456789','123456','123456','']
         self.sign_up(ini_row)
-        is_success = self.check_if_success()
+        self.check_if_success()
 
         result = []
 

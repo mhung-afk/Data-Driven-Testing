@@ -20,8 +20,6 @@ class Sign_Up(DDT_edge):
                 self.wait(0.5)
 
     def sign_up(self, record):
-        print(record)
-
         while True:
             try:
                 temp = self.find_ele(By.XPATH, '//*[@id="navbarSupportedContent"]/button[2]')
