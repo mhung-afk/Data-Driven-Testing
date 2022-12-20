@@ -34,6 +34,7 @@ class B_Forgot_Password_DDT_edge(DDT_edge):
                     By.XPATH, '//button[@class="btn btn-success"]')
                 self.click(temp)
                 self.wait(1)
+                break
             except:
                 trial += 1
                 if trial > 3:

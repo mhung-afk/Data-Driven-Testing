@@ -28,7 +28,7 @@ class B_F1_2(Login_DDT_edge, B_Create_Subject_DDT_edge):
             self.fill_subject_form(record)
             is_success = self.check_if_success()
             print(
-                f'{record[0]} - expected:{record[1]} - result:{handle_result(is_success)}')
+                f'{record[0]} - expected:{record[3]} - result:{handle_result(is_success)}')
             result += [handle_result(is_success)]
             # Refresh the page in case of error
             self.driver.refresh()
