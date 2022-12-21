@@ -4,6 +4,7 @@ from driver.B_F5_3 import B_F5_3
 from driver.B_F6 import B_F6
 from driver.B_F2_1 import B_F2_1
 from driver.A_F2 import A_F2
+from driver.A_F1 import A_F1
 from driver.B_F3_1 import B_F3_1
 from driver.B_F7_1 import B_F7_1
 from driver.B_F7_2 import B_F7_2
@@ -54,6 +55,8 @@ def main(feature, io, sheet, skiprows):
         test = B_F4_1()
     elif feature == 'A-F2':
         test = A_F2()
+    elif feature == 'A-F1':
+        test = A_F1()
     elif feature == 'A-F4':
         test = A_F4()
     elif feature == 'B-F4.2':
@@ -66,7 +69,8 @@ def main(feature, io, sheet, skiprows):
         test = B_F10_3()
     if test:
         DF = Dataframe()
-        DF.read_excel(io=f'test-data/{io}', sheet_name=sheet, skiprows=skiprows)
+        DF.read_excel(io=f'test-data/{io}',
+                      sheet_name=sheet, skiprows=skiprows)
         result = test.run(DF.storage[sheet])
         DF.write_result(result)
         return

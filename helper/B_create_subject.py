@@ -33,8 +33,6 @@ class B_Create_Subject_DDT_edge(DDT_edge):
                 self.text(temp, record[2])
                 self.wait(1)
 
-                # temp = self.find_ele(By.XPATH, """//button[text()='Save']""")
-                # self.click(temp)
                 temp = self.find_ele(By.XPATH, '//*[@id="id_submitbutton"]')
                 self.click(temp)
                 self.wait(1)
@@ -45,38 +43,18 @@ class B_Create_Subject_DDT_edge(DDT_edge):
                     break
 
     def check_if_success(self):
-        return True
+        trial = 0
         while True:
             try:
-                # File upload is done if the filepicker is hidden
-                file_dialog = self.find_ele(
-                    By.XPATH, "//*[contains(@class, 'filepicker')][contains(@class, 'moodle-dialogue-hidden')]")
-                return True
+                error = self.driver.find_element(
+                    By.XPATH, "//div[contains(@class, 'show') and contains(@class, 'collapse') and @id='collapseAddForm']")
+                return False
             except:
                 try:
-                    error = self.find_ele(By.XPATH, "//h5[text()='Lỗi']")
-                    return False
+                    done = self.driver.find_element(
+                        By.XPATH, "//div[contains(@class, 'collapse') and @id='collapseAddForm']")
+                    return True
                 except:
-                    self.wait(1)
-
-    # def check_if_success(self):
-    #     is_success = True
-    #     try:
-    #         if self.will_wait:
-    #             self.wait(self.will_wait)
-    #             self.will_wait = None
-    #             print('waiting')
-
-    #         while True:
-    #             feedbacks = self.find_eles(
-    #                 By.CSS_SELECTOR, '.form-control-feedback.invalid-feedback')
-    #             print([fb.text for fb in feedbacks])
-    #             if len(feedbacks) > 0:
-    #                 if any([(len(fb.text.strip()) > 0) for fb in feedbacks]):
-    #                     is_success = False
-    #                 close_btn = self.find_ele(
-    #                     By.CSS_SELECTOR, "button.close[aria-label='Close']")
-    #                 self.click(close_btn)
-    #                 break
-    #     finally:
-    #         return is_success
+                    trial += 1
+                    if trial > 3:
+                        return False
