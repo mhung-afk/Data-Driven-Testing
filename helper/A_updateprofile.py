@@ -33,7 +33,7 @@ class Update_Profile(DDT_edge):
                 alert = WebDriverWait(self.driver, 5).until(EC.alert_is_present)
                 alert_text = alert.text
                 alert.accept()
-                if alert_text == ("Update failed, please try again.") or alert_text == ("Password is incorrect."): 
+                if alert_text == ('Update failed, please try again.') or alert_text == ('Password is incorrect.'): 
                     is_success = False
                 else: is_success = True
                 return is_success
