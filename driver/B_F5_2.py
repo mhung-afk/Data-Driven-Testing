@@ -15,7 +15,9 @@ class B_F5_2(Login_DDT_edge, Add_Event_DDT_edge):
         self.navigate('https://e-learning.hcmut.edu.vn/my/')
 
         for record in df:
-            self.click_add_event_btn()
+            passed = False
+            while not passed:
+                passed = self.click_add_event_btn()
             self.fill_in_add_event(record)
             is_success = self.check_if_success()
             print(f'{record[0]} - expected:{record[8]} - result:{handle_result(is_success)}')

@@ -46,6 +46,10 @@ class DDT_edge:
 
     def navigate(self, url: str):
         self.driver.get(url)
+    
+    def scroll_to_ele(self, by, ele: str):
+        action = ActionChains(self.driver)
+        action.move_to_element(self.find_ele(by, ele)).perform()
 
     def accpet_refresh(self):
         try:

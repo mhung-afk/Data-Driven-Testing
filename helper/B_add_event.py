@@ -23,12 +23,12 @@ class Add_Event_DDT_edge(DDT_edge):
             day_cells = self.find_eles(By.CSS_SELECTOR, '.day.text-sm-center.text-md-left.clickable.hasevent')
             self.click_to_ele_with_offset(day_cells[math.floor(random() * len(day_cells))], 1, 70)
             tabindex = self.find_ele(By.CSS_SELECTOR, '.modal-dialog.modal-lg.modal-dialog-scrollable').get_attribute('tabindex')
-            print(tabindex)
             if tabindex == '-1':
                 self.wait(1)
                 return False
             return True
         except:
+            self.wait(1)
             return False
     
     def click_arrow(self):
@@ -53,11 +53,9 @@ class Add_Event_DDT_edge(DDT_edge):
             if self.will_wait:
                 self.wait(self.will_wait)
                 self.will_wait = None
-                print('waiting')
             
             while True:
                 feedbacks = self.find_eles(By.CSS_SELECTOR, '.form-control-feedback.invalid-feedback')
-                print([fb.text for fb in feedbacks])
                 if len(feedbacks) > 0:
                     if any([(len(fb.text.strip()) > 0) for fb in feedbacks]):
                         is_success = False
@@ -68,8 +66,6 @@ class Add_Event_DDT_edge(DDT_edge):
             return is_success
 
     def fill_in_add_event(self, record):
-        print(record)
-
         while True:
             try:
                 temp = self.find_ele(By.XPATH, '//*[@id="id_name"]')
@@ -118,6 +114,7 @@ class Add_Event_DDT_edge(DDT_edge):
         self.text(temp, record[4])
             
         if len(record[5]) > 0:
+            self.will_wait = 5
             until_time = handle_datetime(record[5])
             temp = self.find_ele(By.XPATH, '//*[@id="id_duration_1"]')
             self.click(temp)
@@ -148,8 +145,7 @@ class Add_Event_DDT_edge(DDT_edge):
         elif len(str(record[6])) > 0:
             if record[6] == '<null>':
                 record[6] = ''
-            self.will_wait = 5
-            print(record[6])
+            self.will_wait = 10
             temp = self.find_ele(By.XPATH, '//*[@id="id_duration_2"]')
             self.click(temp)
             temp = self.find_ele(By.XPATH, '//*[@id="id_timedurationminutes"]')
@@ -161,7 +157,6 @@ class Add_Event_DDT_edge(DDT_edge):
         if len(str(record[7])) > 0:
             if record[7] == '<null>':
                 record[7] = ''
-            print(record[7])
             temp = self.find_ele(By.XPATH, '//*[@id="id_repeat"]')
             self.click(temp)
             temp = self.find_ele(By.XPATH, '//*[@id="id_repeats"]')
