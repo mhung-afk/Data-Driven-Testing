@@ -23,8 +23,7 @@ class B_F1_3(Login_DDT_edge, B_Create_Subject_DDT_edge):
             'https://e-learning.hcmut.edu.vn/mod/forum/view.php?id=8740')
 
         for record in df:
-            print('ok\n')
-            self.click_crreate_subject_btn()
+            self.click_create_subject_btn()
             self.fill_subject_form(record)
             is_success = self.check_if_success()
             print(

@@ -7,7 +7,7 @@ import math
 class B_Create_Subject_DDT_edge(DDT_edge):
     will_wait = None
 
-    def click_crreate_subject_btn(self):
+    def click_create_subject_btn(self):
         trial = 0
         while True:
             try:
