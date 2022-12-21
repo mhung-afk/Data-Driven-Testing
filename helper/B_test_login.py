@@ -22,6 +22,7 @@ class Test_Login_DDT_edge(DDT_edge):
                 temp = self.find_ele(By.XPATH, '//*[@id="fm1"]/div[4]/input[4]')
                 self.click(temp)
                 self.wait(1)
+
                 break
             except:
                 break
@@ -30,6 +31,7 @@ class Test_Login_DDT_edge(DDT_edge):
         while True:
             try:
                 homepage = self.find_ele(By.XPATH, '//*[@id="page-site-index"]')
+                
                 return True
             except:
                 try:

@@ -5,22 +5,25 @@ from selenium.webdriver.support import expected_conditions as EC
 
 class Update_Profile(DDT_edge):
     def update_profile(self, record):
-        temp = self.find_ele(By.XPATH, '//*[@id="firstName"]')
-        self.text(temp, record[1])
+        while True:
+            try:
+                temp = self.find_ele(By.XPATH, '//*[@id="firstName"]')
+                self.text(temp, record[1])
         
-        temp = self.find_ele(By.XPATH, '//*[@id="lastName"]')
-        self.text(temp, record[2])
+                temp = self.find_ele(By.XPATH, '//*[@id="lastName"]')
+                self.text(temp, record[2])
 
-        temp = self.find_ele(By.XPATH, '//*[@id="email"]')
-        self.text(temp, record[3])
+                temp = self.find_ele(By.XPATH, '//*[@id="email"]')
+                self.text(temp, record[3])
 
-        temp = self.find_ele(By.XPATH, '//*[@id="phone"]')
-        self.text(temp, record[4])
+                temp = self.find_ele(By.XPATH, '//*[@id="phone"]')
+                self.text(temp, record[4])
         
-        temp = self.find_ele(By.XPATH, '//*[@id="password"]')
-        self.text(temp, record[5])
-
-        
+                temp = self.find_ele(By.XPATH, '//*[@id="password"]')
+                self.text(temp, record[5])
+                break
+            except:
+                break
     def check_success(self):
         while True:
             try:
