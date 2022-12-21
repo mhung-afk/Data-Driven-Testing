@@ -25,7 +25,8 @@ class B_F4_1(B_Forgot_Password_DDT_edge):
             print(
                 f'{record[0]} - expected:{record[5]} - result:{handle_result(is_success)}')
             result += [handle_result(is_success)]
+            self.driver.refresh()
 
-        self.wait(5)
+        self.wait(3)
 
         return result

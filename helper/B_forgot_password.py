@@ -41,17 +41,16 @@ class B_Forgot_Password_DDT_edge(DDT_edge):
                     break
 
     def check_if_success(self):
+        trial = 0
         while True:
             try:
                 file_dialog = self.find_ele(
-                    By.XPATH, "//*[contains(@class, 'filepicker')][contains(@class, 'moodle-dialogue-hidden')]")
+                    By.XPATH, "//*[contains(@class, 'result')][contains(@class, 'result alert alert-success')]")
                 return True
             except:
-                try:
-                    error = self.find_ele(By.XPATH, "//h5[text()='Lỗi']")
+                trial += 1
+                if trial > 3:
                     return False
-                except:
-                    self.wait(1)
 
     # def check_if_success(self):
     #     is_success = True
