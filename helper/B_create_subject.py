@@ -33,8 +33,6 @@ class B_Create_Subject_DDT_edge(DDT_edge):
                 self.text(temp, record[2])
                 self.wait(1)
 
-                # temp = self.find_ele(By.XPATH, """//button[text()='Save']""")
-                # self.click(temp)
                 temp = self.find_ele(By.XPATH, '//*[@id="id_submitbutton"]')
                 self.click(temp)
                 self.wait(1)
@@ -48,12 +46,15 @@ class B_Create_Subject_DDT_edge(DDT_edge):
         trial = 0
         while True:
             try:
-                # File upload is done if the filepicker is hidden
-                file_dialog = self.driver.find_element(
-                    By.XPATH, "//div[contains(@class, 'collapse') and @id='collapseAddForm']")
-                print("found")
-                return True
+                error = self.driver.find_element(
+                    By.XPATH, "//div[contains(@class, 'show') and contains(@class, 'collapse') and @id='collapseAddForm']")
+                return False
             except:
-                trial += 1
-                if trial > 3:
-                    return False
+                try:
+                    done = self.driver.find_element(
+                        By.XPATH, "//div[contains(@class, 'collapse') and @id='collapseAddForm']")
+                    return True
+                except:
+                    trial += 1
+                    if trial > 3:
+                        return False
