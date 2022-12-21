@@ -43,7 +43,6 @@ class B_Forgot_Password_DDT_edge(DDT_edge):
     def check_if_success(self):
         while True:
             try:
-                # File upload is done if the filepicker is hidden
                 file_dialog = self.find_ele(
                     By.XPATH, "//*[contains(@class, 'filepicker')][contains(@class, 'moodle-dialogue-hidden')]")
                 return True

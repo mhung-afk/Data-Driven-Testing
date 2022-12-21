@@ -45,19 +45,23 @@ class B_Create_Subject_DDT_edge(DDT_edge):
                     break
 
     def check_if_success(self):
-        return True
+        trial = 0
         while True:
             try:
                 # File upload is done if the filepicker is hidden
                 file_dialog = self.find_ele(
-                    By.XPATH, "//*[contains(@class, 'filepicker')][contains(@class, 'moodle-dialogue-hidden')]")
+                    By.XPATH, "//*[contains(@class, 'collapseAddForm')][contains(@class, 'mt-3 pb-3 collapse')]")
                 return True
             except:
                 try:
-                    error = self.find_ele(By.XPATH, "//h5[text()='Lỗi']")
+                    error = self.find_ele(
+                        By.XPATH, "//*[contains(@class, 'collapseAddForm')][contains(@class, 'mt-3 pb-3 collapse show')]")
                     return False
                 except:
                     self.wait(1)
+                    trial += 1
+                    if trial > 3:
+                        break
 
     # def check_if_success(self):
     #     is_success = True
