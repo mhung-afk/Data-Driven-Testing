@@ -45,31 +45,9 @@ class B_Forgot_Password_DDT_edge(DDT_edge):
         while True:
             try:
                 file_dialog = self.find_ele(
-                    By.XPATH, "//*[contains(@class, 'result')][contains(@class, 'result alert alert-success')]")
+                    By.XPATH, "//div[contains(@class, 'alert-success')]")
                 return True
             except:
                 trial += 1
                 if trial > 3:
                     return False
-
-    # def check_if_success(self):
-    #     is_success = True
-    #     try:
-    #         if self.will_wait:
-    #             self.wait(self.will_wait)
-    #             self.will_wait = None
-    #             print('waiting')
-
-    #         while True:
-    #             feedbacks = self.find_eles(
-    #                 By.CSS_SELECTOR, '.form-control-feedback.invalid-feedback')
-    #             print([fb.text for fb in feedbacks])
-    #             if len(feedbacks) > 0:
-    #                 if any([(len(fb.text.strip()) > 0) for fb in feedbacks]):
-    #                     is_success = False
-    #                 close_btn = self.find_ele(
-    #                     By.CSS_SELECTOR, "button.close[aria-label='Close']")
-    #                 self.click(close_btn)
-    #                 break
-    #     finally:
-    #         return is_success

@@ -23,6 +23,21 @@ class Sign_Up(DDT_edge):
             except:
                 self.wait(0.5)
 
+    def change_quantity(self, record):
+        while True:
+            try:
+                temp = self.find_ele(
+                    By.XPATH, '//*[@id="navbarSupportedContent"]/button[2]')
+                self.click(temp)
+                style = self.find_ele(
+                    By.ID, 'signupModal').get_attribute('style')
+                if style == 'display: none;':
+                    self.wait(0.5)
+                else:
+                    break
+            except:
+                self.wait(0.5)
+
     def sign_up(self, record):
         while True:
             try:
