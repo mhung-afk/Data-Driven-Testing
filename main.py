@@ -13,6 +13,11 @@ from driver.B_F1_1 import B_F1_1
 from driver.B_F1_2 import B_F1_2
 from driver.B_F1_3 import B_F1_3
 from driver.B_F4_1 import B_F4_1
+from driver.A_F4 import A_F4
+from driver.B_F4_2 import B_F4_2
+from driver.B_F10_1 import B_F10_1
+from driver.B_F10_2 import B_F10_2
+from driver.B_F10_3 import B_F10_3
 from helper.base import Dataframe
 
 
@@ -49,7 +54,16 @@ def main(feature, io, sheet, skiprows):
         test = B_F4_1()
     elif feature == 'A-F2':
         test = A_F2()
-    
+    elif feature == 'A-F4':
+        test = A_F4()
+    elif feature == 'B-F4.2':
+        test = B_F4_2()
+    elif feature == 'B-F10.1':
+        test = B_F10_1()
+    elif feature == 'B-F10.2':
+        test = B_F10_2()
+    elif feature == 'B-F10.3':
+        test = B_F10_3()
     if test:
         DF = Dataframe()
         DF.read_excel(io=f'test-data/{io}', sheet_name=sheet, skiprows=skiprows)
